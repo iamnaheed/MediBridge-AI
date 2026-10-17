@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MediBridge AI helps patients prepare for appointments, stay safe after discharge, and keep in touch with their doctor for 30 days.">
+  <meta name="theme-color" content="#c6ff4d">
+  <title>MediBridge AI | Your Health, Better Prepared</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="blob blob-one" aria-hidden="true"></div>
+  <div class="blob blob-two" aria-hidden="true"></div>
+  <div class="blob blob-three" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#app">Skip to content</a>
+
+  <header class="topbar">
+    <a href="#" class="brand"><span class="brand-icon">+</span> MediBridge AI</a>
+    <div class="topbar-right">
+      <span class="status">● Patient care companion</span>
+      <button type="button" class="icon-button" id="themeToggle" aria-label="Switch between light and dark mode" title="Light / dark">🌙</button>
+    </div>
+  </header>
+
+  <div class="emergency-bar" role="note">
+    🚨 <strong>Emergency?</strong> Don't use this app — call your local emergency number now
+    (e.g. 911 US · 999 UK · 112 EU/India · 1122 Pakistan).
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">✨ YOUR HEALTH, BETTER PREPARED</p>
+      <h1>Make every doctor visit <span>count.</span></h1>
+      <p class="hero-copy">Prep for appointments, stay safe after leaving the hospital, and keep your doctor in the loop for 30 days. All in one place, no stress.</p>
+
+      <div class="hero-actions">
+        <button type="button" class="cta cta-primary" data-tab="prep">📋 Prep my appointment</button>
+        <button type="button" class="cta cta-alt" data-tab="discharge">🏥 I'm back from hospital</button>
+        <button type="button" class="cta cta-ghost" data-tab="followup">📈 Track my 30 days</button>
+      </div>
+
+      <ul class="sticker-row" aria-label="Highlights">
+        <li>🔒 Data stays on your device</li>
+        <li>🚫 No diagnosis</li>
+        <li>💊 No medicine guessing</li>
+        <li>🌍 Works anywhere</li>
+      </ul>
+    </section>
+
+    <section class="notice">
+      <strong>Important:</strong> MediBridge AI helps you prepare and stay safe. It does not diagnose conditions, recommend medicines, or replace professional medical advice.
+    </section>
+
+    <nav class="tabs" role="tablist" aria-label="MediBridge features" id="app">
+      <button type="button" class="tab is-active" role="tab" id="tabbtn-prep" aria-selected="true" aria-controls="tab-prep" data-tab="prep">
+        <span class="tab-emoji">📋</span><span class="tab-text">Appointment Prep</span>
+      </button>
+      <button type="button" class="tab" role="tab" id="tabbtn-discharge" aria-selected="false" aria-controls="tab-discharge" data-tab="discharge">
+        <span class="tab-emoji">🏥</span><span class="tab-text">After Discharge</span>
+      </button>
+      <button type="button" class="tab" role="tab" id="tabbtn-followup" aria-selected="false" aria-controls="tab-followup" data-tab="followup">
+        <span class="tab-emoji">📈</span><span class="tab-text">30-Day Follow-up</span>
+      </button>
+    </nav>
+
+    <!-- ============ TAB 1: APPOINTMENT PREP ============ -->
+    <section class="workspace tab-panel" id="tab-prep" role="tabpanel" aria-labelledby="tabbtn-prep">
+      <div class="panel">
+        <h2>Tell us how you're feeling 💬</h2>
+        <p class="muted">Complete the details below to prepare for your appointment.</p>
+
+        <form id="healthForm">
+          <label for="patientName">Your name (optional)</label>
+          <input id="patientName" type="text" placeholder="Enter your name" autocomplete="name">
+
+          <label for="symptoms">What symptoms are you experiencing?</label>
+          <textarea id="symptoms" rows="4" placeholder="Describe your symptoms..." required></textarea>
+
+          <div class="field-row">
+            <div>
+              <label for="duration">How long?</label>
+              <select id="duration" required>
+                <option value="">Select duration</option>
+                <option>Started today</option>
+                <option>2–3 days</option>
+                <option>4–7 days</option>
+                <option>More than a week</option>
+                <option>Recurring symptoms</option>
+              </select>
+            </div>
+            <div>
+              <label for="severity">Severity</label>
+              <select id="severity" required>
+                <option value="">Select severity</option>
+                <option>Mild</option>
+                <option>Moderate</option>
+                <option>Severe</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="notes">Additional information (optional)</label>
+          <textarea id="notes" rows="3" placeholder="Triggers, relevant history, or other observations..."></textarea>
+
+          <button type="submit" class="submit-button">Create my appointment summary →</button>
+        </form>
+      </div>
+
+      <div class="panel results-panel">
+        <div class="result-icon">✦</div>
+        <h2>Your appointment prep</h2>
+        <p class="muted">Your summary and suggested questions will appear here after you complete the form.</p>
+        <div id="results" aria-live="polite">
+          <div class="empty-state">
+            <span>▤</span>
+            <p>Your personalized preparation report is waiting to be created.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 2: AFTER DISCHARGE ============ -->
+    <section class="workspace tab-panel" id="tab-discharge" role="tabpanel" aria-labelledby="tabbtn-discharge" hidden>
+      <div class="panel">
+        <h2>Back home, symptoms back? 🏥</h2>
+        <p class="muted">Log your discharge date and what's returning. You'll get safety guidance and a clear message for your care team. No medicine advice, ever.</p>
+
+        <form id="dischargeForm">
+          <label for="dName">Your name (optional)</label>
+          <input id="dName" type="text" placeholder="Enter your name" autocomplete="name">
+
+          <div class="field-row">
+            <div>
+              <label for="dDate">Discharge date</label>
+              <input id="dDate" type="date" required>
+            </div>
+            <div>
+              <label for="dSeverity">How bad is it?</label>
+              <select id="dSeverity" required>
+                <option value="">Select severity</option>
+                <option>Mild</option>
+                <option>Moderate</option>
+                <option>Severe</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="dReason">Why were you in hospital? (optional)</label>
+          <input id="dReason" type="text" placeholder="e.g. appendix surgery, pneumonia...">
+
+          <fieldset class="chip-group">
+            <legend>Tap what's happening (pick any)</legend>
+            <div class="chips" id="symptomChips">
+              <label class="chip"><input type="checkbox" value="Chest pain or pressure" data-level="3"><span>💔 Chest pain / pressure</span></label>
+              <label class="chip"><input type="checkbox" value="Trouble breathing" data-level="3"><span>😮‍💨 Trouble breathing</span></label>
+              <label class="chip"><input type="checkbox" value="Confusion, fainting or sudden weakness" data-level="3"><span>🌀 Confusion / fainting</span></label>
+              <label class="chip"><input type="checkbox" value="Heavy or uncontrolled bleeding" data-level="3"><span>🩸 Heavy bleeding</span></label>
+              <label class="chip"><input type="checkbox" value="Fever or chills" data-level="2"><span>🌡️ Fever / chills</span></label>
+              <label class="chip"><input type="checkbox" value="Wound redness, swelling or discharge" data-level="2"><span>🩹 Wound looks off</span></label>
+              <label class="chip"><input type="checkbox" value="Vomiting that won't stop" data-level="2"><span>🤢 Constant vomiting</span></label>
+              <label class="chip"><input type="checkbox" value="Pain getting worse" data-level="2"><span>📈 Pain getting worse</span></label>
+              <label class="chip"><input type="checkbox" value="Leg swelling or calf pain" data-level="2"><span>🦵 Leg swelling / calf pain</span></label>
+              <label class="chip"><input type="checkbox" value="Unusual tiredness" data-level="0"><span>😴 Very tired</span></label>
+              <label class="chip"><input type="checkbox" value="Mild nausea" data-level="0"><span>🫤 Mild nausea</span></label>
+              <label class="chip"><input type="checkbox" value="Poor sleep or appetite" data-level="0"><span>🍽️ Poor sleep / appetite</span></label>
+              <label class="chip"><input type="checkbox" value="Mild dizziness" data-level="0"><span>💫 Mild dizziness</span></label>
+            </div>
+          </fieldset>
+
+          <label for="dOther">Anything else? (optional)</label>
+          <textarea id="dOther" rows="3" placeholder="When it started, what changed, anything that worries you..."></textarea>
+
+          <button type="submit" class="submit-button">Check my safety guidance →</button>
+        </form>
+      </div>
+
+      <div class="panel results-panel">
+        <div class="result-icon">🛟</div>
+        <h2>Your safety guidance</h2>
+        <p class="muted">Guidance based on the warning signs you select. It's a prompt to get checked, not a diagnosis.</p>
+        <div id="dischargeResults" aria-live="polite">
+          <div class="empty-state">
+            <span>🛟</span>
+            <p>Fill in the form and your guidance shows up here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 3: 30-DAY FOLLOW-UP ============ -->
+    <section class="workspace tab-panel" id="tab-followup" role="tabpanel" aria-labelledby="tabbtn-followup" hidden>
+      <div class="panel">
+        <h2>Your 30-day recovery log 📈</h2>
+        <p class="muted">Check in daily. When you're ready, turn it into an email draft for your doctor.</p>
+
+        <form id="setupForm">
+          <div class="field-row">
+            <div>
+              <label for="fName">Your name</label>
+              <input id="fName" type="text" placeholder="Your name" autocomplete="name">
+            </div>
+            <div>
+              <label for="fStart">Day 1 (discharge / start)</label>
+              <input id="fStart" type="date" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label for="fDoctor">Doctor's name</label>
+              <input id="fDoctor" type="text" placeholder="Dr. Khan">
+            </div>
+            <div>
+              <label for="fEmail">Doctor's email</label>
+              <input id="fEmail" type="email" placeholder="doctor@clinic.com" autocomplete="off">
+            </div>
+          </div>
+          <button type="submit" class="submit-button submit-alt">Save setup ✅</button>
+        </form>
+
+        <hr class="divider">
+
+        <form id="checkinForm">
+          <h3 class="form-title">Daily check-in</h3>
+
+          <label for="cDate">Date</label>
+          <input id="cDate" type="date" required>
+
+          <fieldset class="mood-group">
+            <legend>How are you feeling overall?</legend>
+            <div class="moods">
+              <label class="mood"><input type="radio" name="mood" value="1"><span>😫<small>Rough</small></span></label>
+              <label class="mood"><input type="radio" name="mood" value="2"><span>😕<small>Meh</small></span></label>
+              <label class="mood"><input type="radio" name="mood" value="3"><span>😐<small>Okay</small></span></label>
+              <label class="mood"><input type="radio" name="mood" value="4"><span>🙂<small>Good</small></span></label>
+              <label class="mood"><input type="radio" name="mood" value="5"><span>🤩<small>Great</small></span></label>
+            </div>
+          </fieldset>
+
+          <label for="cPain">Pain level: <output id="cPainOut">0</output>/10</label>
+          <input id="cPain" type="range" min="0" max="10" step="1" value="0">
+
+          <label for="cMeds">Medicines as prescribed by your doctor?</label>
+          <select id="cMeds">
+            <option>Took them as prescribed</option>
+            <option>Missed some</option>
+            <option>Not prescribed any</option>
+          </select>
+
+          <label for="cNote">Notes for your doctor (optional)</label>
+          <textarea id="cNote" rows="3" placeholder="Symptoms, wound, sleep, appetite, questions..."></textarea>
+
+          <button type="submit" class="submit-button">Save today's check-in →</button>
+        </form>
+      </div>
+
+      <div class="panel results-panel">
+        <div class="result-icon">🗓️</div>
+        <h2>Your recovery dashboard</h2>
+        <p class="muted">Progress, patterns and your doctor update live here.</p>
+        <div id="trackerView" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer>
+      MediBridge AI · Built for a hackathon · Prototype for education, not medical care<br>
+      Your entries are saved only in this browser. Emails open in your own mail app.
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
